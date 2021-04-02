@@ -1,41 +1,47 @@
-namespace Liquid {
-    let pin = AnalogPin.P0
-    let volt = 0;
-    let adc = 0;
+namespace DigitalPet {
 
-
-    /**
-     * Set pin at which the Liquid Level Senor AOUT line is connected;
-     * @param pin_arg pin at which the Liquid Level Senor AOUT line is connected;
-     */
-    //% blockId=Liquid_setPin
-    //% block="set liquid pin |%pinarg|"
-    //% weight = 85
-    export function setPin(pin_arg: AnalogPin): void {
-        pin = pin_arg;
+	/**
+	 * WriteTimer to Moving fish
+     * @param Timer [0-500] the Time value; eg: 128, 0, 255
+	*/
+    //% blockId=DigitalPet_MoveFish
+    //% block="正常移动的鱼 |%value|"
+    //% weight=65
+    //% value.min=0 value.max=500
+    export function MoveFish (Timer: number) {
+    if (Timer < 20) {
+        images.createImage(`
+            . . . . .
+            . # # . #
+            # . . # .
+            . # # . #
+            . . . . .
+            `).showImage(Timer % 5)
+    } else if (Timer >= 20&&Timer<30) {
+        images.createImage(`
+            . . . . .
+            . . . . .
+            . # # . #
+            # . . # .
+            . # # . #
+            `).showImage(Timer % 5)
+    } else if (Timer >= 30&&Timer<40) {
+        images.createImage(`
+            . . . . .
+            . . . . .
+            . . . . .
+            . # # . #
+            # . . # .
+            `).showImage(Timer % 5)
+    } else if (Timer >= 40) {
+        images.createImage(`
+            . . . . .
+            . # # # .
+            . # . # .
+            . # . # .
+            # # # # #
+            `).showImage(0)
     }
 
-
-    /**
-     * Return the adc value from the AnalogPin;
-     */
-    //% blockId=Liquid_getADCValue
-    //% block="get liquid adc value"
-    //% weight = 75
-    export function getADCValue(): number {
-        adc = pins.analogReadPin(pin);
-        return adc;
-    }
-
-    /**
-     * Return the volt value from the AnalogPin;
-     */
-    //% blockId=Liquid_getVoltValue
-    //% block="get liquid volt value"
-    //% weight = 65
-    export function getVoltValue(): number {
-        adc = pins.analogReadPin(pin);
-        volt = adc * 3300 / 1024;
-        return volt;
-    }
+    }       
 }
