@@ -110,7 +110,7 @@ namespace Sound {
     //% weight = 45
     export function getNoise(): number {
         noise = pins.analogReadPin(Apin);
-        if (noise>80) {
+        if (noise>40) {
             return 1;
         } else {
             return 0;
