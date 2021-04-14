@@ -120,12 +120,12 @@ namespace Sound {
 namespace Teris {
 
 	/**
-	 * move block right 1 step
+	 * move block left 1 step
      * @Current_Squares the current block list; eg:[]
      * @All_Sprites the list of all blocks; eg:[]
 	*/
     //% blockId=Teris_BlockMoveLeft
-    //% block="方块左移 |%value|"
+    //% block="方块左移 |%Current_Squares|%All_Sprites|"
     //% weight=55
     export function BlockMoveLeft (Current_Squares:game.LedSprite[],All_Sprites:game.LedSprite[]) {
         let tempx =0
@@ -156,5 +156,87 @@ namespace Teris {
                 Current_sprite.move(1)
             }
         }  
+    }
+
+    /**
+	 * move block right 1 step
+     * @Current_Squares the current block list; eg:[]
+     * @All_Sprites the list of all blocks; eg:[]
+	*/
+    //% blockId=Teris_BlockMoveRight
+    //% block="方块右移 |%Current_Squares|%All_Sprites|"
+    //% weight=65
+    export function BlockMoveRight (Current_Squares:game.LedSprite[],All_Sprites:game.LedSprite[]) {
+        let tempx =0
+        let tempy =0
+        let Ismoveable =1
+        for (let 值4 of Current_Squares) {
+            tempx = 值4.x() + 1
+            tempy = 值4.y()
+            if (tempx > 4) {
+                Ismoveable = 0
+                break;
+            } else {
+                Ismoveable = 1
+            }
+            for (let sptB of All_Sprites) {
+                if (sptB.y() == tempy && sptB.x() == tempx) {
+                    Ismoveable = 0
+                    break;
+                }
+            }
+            if (Ismoveable == 0) {
+                break;
+            }
+        }
+        if (Ismoveable == 1) {
+            for (let 值42 of Current_Squares) {
+                值42.set(LedSpriteProperty.Direction, 90)
+                值42.move(1)
+            }
+        }
+        }
+
+    /**
+	 * move block rotate 90 degree
+     * @Current_Squares the current block list; eg:[]
+     * @All_Sprites the list of all blocks; eg:[]
+	*/
+    //% blockId=Teris_BlockRotate
+    //% block="方块旋转 |%Current_Squares|%All_Sprites|"
+    //% weight=75
+    export function BlockRotate (Current_Squares:game.LedSprite[],All_Sprites:game.LedSprite[]) {
+        let tempx =0
+        let tempy =0
+        let Ismoveable =1
+        let anchorX = Current_Squares[0].x()
+        let anchorY = Current_Squares[0].y()
+        for (let 值36 of Current_Squares) {
+                tempx = 值36.y() + (anchorX - anchorY)
+                tempy = anchorX + anchorY - 值36.x()
+                if (tempx < 0 || tempy < 0 || tempx > 4 || tempy > 4) {
+                    Ismoveable = 0
+                    break;
+                } else {
+                    Ismoveable = 1
+                }
+                for (let aspt of All_Sprites) {
+                    if (aspt.x() == tempx && aspt.y() == tempy) {
+                        Ismoveable = 0
+                        break;
+                    }
+                }
+                if (Ismoveable == 0) {
+                    break;
+                }
+            }
+            if (Ismoveable == 1) {
+                for (let cspt of Current_Squares) {
+                    tempx = cspt.y() + (anchorX - anchorY)
+                    tempy = anchorX + anchorY - cspt.x()
+                    cspt.set(LedSpriteProperty.X, tempx)
+                    cspt.set(LedSpriteProperty.Y, tempy)
+                }
+            }
     }
 }
