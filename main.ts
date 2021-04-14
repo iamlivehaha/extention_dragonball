@@ -117,3 +117,45 @@ namespace Sound {
         }
     }
 }
+
+namespace Teris {
+
+	/**
+	 * move block right 1 step
+     * @Current_Squares the current block list; eg:[]
+     * @All_Sprites the list of all blocks; eg:[]
+	*/
+    //% blockId=DigitalPet_MoveFish
+    //% block="方块左移 |%value|"
+    //% weight=55
+    export function BlockMoveLeft (Current_Squares:game.LedSprite[],All_Sprites:game.LedSprite[]) {
+        let tempx =0
+        let tempy =0
+        let Ismoveable =1
+        for (let 值32 of Current_Squares) {
+            tempx = 值32.x() - 1
+            tempy = 值32.y()
+            if (tempx < 0) {
+                Ismoveable = 0
+                break;
+            } else {
+                Ismoveable = 1
+            }
+            for(let spt of All_Sprites)
+            {
+                if(spt.y()==tempy&&spt.x()==tempx)
+                {
+                    Ismoveable=0
+                    break;
+                }
+            }
+            if(Ismoveable==0)break
+        }
+        if (Ismoveable == 1) {
+            for (let Current_sprite of Current_Squares) {
+                Current_sprite.set(LedSpriteProperty.Direction, -90)
+                Current_sprite.move(1)
+            }
+        }  
+    }
+}
