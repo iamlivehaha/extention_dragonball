@@ -117,7 +117,6 @@ namespace Sound {
         }
     }
 }
-
 namespace Teris {
 
 	/**
@@ -125,7 +124,7 @@ namespace Teris {
      * @Current_Squares the current block list; eg:[]
      * @All_Sprites the list of all blocks; eg:[]
 	*/
-    //% blockId=DigitalPet_MoveFish
+    //% blockId=Teris_BlockMoveLeft
     //% block="方块左移 |%value|"
     //% weight=55
     export function BlockMoveLeft (Current_Squares:game.LedSprite[],All_Sprites:game.LedSprite[]) {
