@@ -247,36 +247,31 @@ namespace FishingGame {
 
 	/**5
 	 * WriteTimer to Moving fish
-     * @param FishType [0-2] the Fish Type; eg:  0
-     * @param HookTime [3-6] the HookTime value; eg:  4
+     * @param FishType [1-3] the Fish Type; eg:  1
 	*/
     //% blockId=FishingGame_CreateRandomFish
-    //% block="随机创造鱼 |%FishType|%HookTime|"
+    //% block="随机创造鱼 |%FishType|"
     //% weight=55
     //% value.min=0 value.max=2
-    export function CreateRandomFish (FishType: number,HookTime:number) {
+    export function CreateRandomFish (FishType: number) {
     // 0:mackerel鲭（产于北大西洋）；马鲛鱼
     // 1:真鲷red sea bream
     // 2:Shark 鲨鱼
         let Fish  = null
         let Fish_X =0
         let Fish_Y =0
-        if (FishType == 0) {
+        if (FishType == 1) {
             Fish_X = randint(0, 4)
             Fish_Y = randint(3, 4)
-            HookTime = randint(4, 6)
-        } else if (FishType == 1) {
-            Fish_X = randint(0, 4)
-            Fish_Y = randint(5, 9)
-            HookTime = randint(6, 8)
         } else if (FishType == 2) {
             Fish_X = randint(0, 4)
+            Fish_Y = randint(5, 9)
+        } else if (FishType == 3) {
+            Fish_X = randint(0, 4)
             Fish_Y = randint(10, 14)
-            HookTime = randint(8, 10)
         }
         Fish = game.createSprite(Fish_X % 5, Fish_Y % 5)
         Fish.set(LedSpriteProperty.Blink, 500)
         return Fish
-
     } 
     }
