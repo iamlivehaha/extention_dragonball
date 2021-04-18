@@ -264,15 +264,15 @@ namespace FishingGame {
         if (FishType == 0) {
             Fish_X = randint(0, 4)
             Fish_Y = randint(3, 4)
-            HookTime = randint(3, 4)
+            HookTime = randint(4, 6)
         } else if (FishType == 1) {
             Fish_X = randint(0, 4)
             Fish_Y = randint(5, 9)
-            HookTime = randint(4, 5)
+            HookTime = randint(6, 8)
         } else if (FishType == 2) {
             Fish_X = randint(0, 4)
             Fish_Y = randint(10, 14)
-            HookTime = randint(5, 6)
+            HookTime = randint(8, 10)
         }
         Fish = game.createSprite(Fish_X % 5, Fish_Y % 5)
         Fish.set(LedSpriteProperty.Blink, 500)
