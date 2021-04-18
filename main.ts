@@ -167,29 +167,29 @@ namespace Teris {
     //% block="方块右移 |%Current_Squares|%All_Sprites|"
     //% weight=65
     export function BlockMoveRight (Current_Squares:game.LedSprite[],All_Sprites:game.LedSprite[]) {
-        let tempx =0
-        let tempy =0
-        let Ismoveable =1
+        let tempx2 =0
+        let tempy2 =0
+        let Ismoveable2 =1
         for (let 值4 of Current_Squares) {
-            tempx = 值4.x() + 1
-            tempy = 值4.y()
-            if (tempx > 4) {
-                Ismoveable = 0
+            tempx2 = 值4.x() + 1
+            tempy2 = 值4.y()
+            if (tempx2 > 4) {
+                Ismoveable2 = 0
                 break;
             } else {
-                Ismoveable = 1
+                Ismoveable2 = 1
             }
             for (let sptB of All_Sprites) {
-                if (sptB.y() == tempy && sptB.x() == tempx) {
-                    Ismoveable = 0
+                if (sptB.y() == tempy2 && sptB.x() == tempx2) {
+                    Ismoveable2 = 0
                     break;
                 }
             }
-            if (Ismoveable == 0) {
+            if (Ismoveable2 == 0) {
                 break;
             }
         }
-        if (Ismoveable == 1) {
+        if (Ismoveable2 == 1) {
             for (let 值42 of Current_Squares) {
                 值42.set(LedSpriteProperty.Direction, 90)
                 值42.move(1)
@@ -206,43 +206,46 @@ namespace Teris {
     //% block="方块旋转 |%Current_Squares|%All_Sprites|"
     //% weight=75
     export function BlockRotate (Current_Squares:game.LedSprite[],All_Sprites:game.LedSprite[]) {
-        let tempx =0
-        let tempy =0
-        let Ismoveable =1
+        let tempx3 =0
+        let tempy3 =0
+        let Ismoveable3 =1
         let anchorX = Current_Squares[0].x()
         let anchorY = Current_Squares[0].y()
         for (let 值36 of Current_Squares) {
-                tempx = 值36.y() + (anchorX - anchorY)
-                tempy = anchorX + anchorY - 值36.x()
-                if (tempx < 0 || tempy < 0 || tempx > 4 || tempy > 4) {
-                    Ismoveable = 0
+                tempx3 = 值36.y() + (anchorX - anchorY)
+                tempy3 = anchorX + anchorY - 值36.x()
+                if (tempx3 < 0 || tempy3 < 0 || tempx3 > 4 || tempy3 > 4) {
+                    Ismoveable3 = 0
                     break;
                 } else {
-                    Ismoveable = 1
+                    Ismoveable3 = 1
                 }
                 for (let aspt of All_Sprites) {
-                    if (aspt.x() == tempx && aspt.y() == tempy) {
-                        Ismoveable = 0
+                    if (aspt.x() == tempx3 && aspt.y() == tempy3) {
+                        Ismoveable3 = 0
                         break;
                     }
                 }
-                if (Ismoveable == 0) {
+                if (Ismoveable3 == 0) {
                     break;
                 }
             }
-            if (Ismoveable == 1) {
+            if (Ismoveable3 == 1) {
                 for (let cspt of Current_Squares) {
-                    tempx = cspt.y() + (anchorX - anchorY)
-                    tempy = anchorX + anchorY - cspt.x()
-                    cspt.set(LedSpriteProperty.X, tempx)
-                    cspt.set(LedSpriteProperty.Y, tempy)
+                    tempx3 = cspt.y() + (anchorX - anchorY)
+                    tempy3 = anchorX + anchorY - cspt.x()
+                    cspt.set(LedSpriteProperty.X, tempx3)
+                    cspt.set(LedSpriteProperty.Y, tempy3)
                 }
             }
     }
 
+}
+//
+//% weight=55 color=#0000FF icon="\uf1b2"
 namespace FishingGame {
 
-	/**
+	/**5
 	 * WriteTimer to Moving fish
      * @param FishType [0-2] the Fish Type; eg:  0
      * @param HookTime [3-6] the HookTime value; eg:  4
@@ -277,4 +280,3 @@ namespace FishingGame {
 
     } 
     }
-}
